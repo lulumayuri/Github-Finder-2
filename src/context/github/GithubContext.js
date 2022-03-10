@@ -7,6 +7,7 @@ export	const GithubProvider = ({children})=>{
     const intialState =(
         {
             users:[],
+            user:{},
             loading:false
         }
     )
@@ -43,6 +44,22 @@ export	const GithubProvider = ({children})=>{
                    payload : items,
                })
     }
+    const findhUser = async (login)=>{
+        setLoading()
+      
+        const response = await fetch(`https://api.github.com/users/${login}`)
+        
+        if(response.status===404){
+            window.location='/notfound'
+            console.log('hello')
+        }else{
+            const item = await response.json()
+            dispatch({
+                type:'GET_USER',
+                payload:item
+            })
+        }
+    }
     const setLoading =()=>{
         dispatch({
             type:'SET_LOADING'
@@ -52,7 +69,9 @@ export	const GithubProvider = ({children})=>{
         users:state.users,
         loading:state.loading,
         searchUser,
-        clear
+        clear,
+        user:state.user,
+        findhUser
        
     }}>
         {children}

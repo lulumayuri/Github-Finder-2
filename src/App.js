@@ -9,6 +9,7 @@ import Navbar from './components/shared/Navbar';
 import {GithubProvider} from "./context/github/GithubContext"
 import {AlertProvider} from "./context/alert/alertContext"
 import Alert from './components/shared/Alert';
+import User from './components/pages/User';
 function App() {
   return (
     <GithubProvider>
@@ -21,6 +22,7 @@ function App() {
                     <Routes>
                       
                       <Route path='/' element={<Home />}/>
+                      <Route path='/user/:login' element={<User/>}/>
                       <Route path='/about' element={<About />}/>
                       <Route path='/notfound' element={<NotFound />}/>
                       <Route path='/*' element={<NotFound />}/>
