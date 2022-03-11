@@ -8,6 +8,7 @@ export	const GithubProvider = ({children})=>{
         {
             users:[],
             user:{},
+            repos:[],
             loading:false
         }
     )
@@ -60,6 +61,25 @@ export	const GithubProvider = ({children})=>{
             })
         }
     }
+    const getUserRepo = async (login)=>{
+        setLoading()
+      
+        const response = await fetch(`https://api.github.com/users/${login}/repos`)
+        
+        if(response.status===404){
+            window.location='/notfound'
+            console.log('hello')
+        }else{
+            
+            const item = await response.json()
+            console.log(item)
+            dispatch({
+                type:'GET_USER_REPO',
+                payload:item
+            })
+           
+        }
+    }
     const setLoading =()=>{
         dispatch({
             type:'SET_LOADING'
@@ -71,6 +91,8 @@ export	const GithubProvider = ({children})=>{
         searchUser,
         clear,
         user:state.user,
+        getUserRepo,
+        repos:state.repos,
         findhUser
        
     }}>
