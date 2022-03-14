@@ -96,7 +96,7 @@ function User() {
                 <div className='stat'>
                   <div className='text-black stat-title text-md  '>WebSite</div>
                   <div className='text-lg stat-value text-white'>
-                    <a href='#' target='_blank' rel='noreferrer'>
+                    <a href={websiteUrl} target='_blank' rel='noreferrer'>
                       {websiteUrl}
                     </a>
                   </div>
